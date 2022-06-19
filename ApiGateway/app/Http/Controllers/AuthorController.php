@@ -54,7 +54,7 @@ class AuthorController extends Controller
      */
     public function show($author)
     {
-        $author = $this->authorService->showAuthor($author);
+        $author = $this->authorService->getAuthor($author);
         return $this->successResponse($author);
     }
 
@@ -75,7 +75,7 @@ class AuthorController extends Controller
     public function destroy($author)
     {
         $author = $this->authorService->deleteAuthor($author);
-        return $this->successResponse($author, Response::HTTP_NO_CONTENT);
+        return $this->successResponse($author, Response::HTTP_ACCEPTED);
     }
 
 }

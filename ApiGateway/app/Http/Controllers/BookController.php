@@ -7,6 +7,7 @@ use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Services\BookService;
+use App\Services\AuthorService;
 
 class BookController extends Controller
 {
@@ -19,13 +20,23 @@ class BookController extends Controller
     public $bookService;
 
     /**
+     * The service to consume the authors microservice
+     * @var AuthorService
+     */
+    public $authorService;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(BookService $bookService)
+    public function __construct(
+        BookService $bookService,
+        AuthorService $authorService
+        )
     {
         $this->bookService = $bookService;
+        $this->authorService = $authorService;
     }
 
     /**
@@ -34,6 +45,8 @@ class BookController extends Controller
      */
     public function index()
     {
+        $books = $this->bookService->getBooks();
+        return $this->successResponse($books);
     }
 
     /**
@@ -43,6 +56,10 @@ class BookController extends Controller
     public function store(Request $request)
     {
 
+        $this->authorService->getAuthor($request->author_id);
+
+        $book = $this->bookService->createBook($request->all());
+        return $this->successResponse($book, Response::HTTP_CREATED);
     }
 
     /**
@@ -51,7 +68,8 @@ class BookController extends Controller
      */
     public function show($book)
     {
-
+        $book = $this->bookService->showBook($book);
+        return $this->successResponse($book);
     }
 
     /**
@@ -60,7 +78,10 @@ class BookController extends Controller
      */
     public function update(Request $request, $book)
     {
+        $this->authorService->getAuthor($request->author_id);
 
+        $book = $this->bookService->updateBook($request->all(), $book);
+        return $this->successResponse($book);
     }
 
     /**
@@ -69,7 +90,8 @@ class BookController extends Controller
      */
     public function destroy($book)
     {
-
+        $book = $this->bookService->deleteBook($book);
+        return $this->successResponse($book, Response::HTTP_ACCEPTED);
     }
 
 }

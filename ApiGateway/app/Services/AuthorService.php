@@ -42,7 +42,7 @@ class AuthorService
      * Obtain and show one author
      * @return string
      */
-    public function showAuthor($author)
+    public function getAuthor($author)
     {
         return $this->performeRequest('GET', "/authors/{$author}");
     }
