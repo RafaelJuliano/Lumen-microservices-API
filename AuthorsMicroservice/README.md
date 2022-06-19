@@ -123,7 +123,7 @@ Name | Type | Description | Required
 -----|------|-------------|----------
 name | string | The name of the author | &#x2717;
 contry | string | The country of the author | &#x2717;
-gender | string | The gender of the author `male | female` | &#x2717;
+gender | string | The gender of the author `male or female` | &#x2717;
 
 #### Response
 
