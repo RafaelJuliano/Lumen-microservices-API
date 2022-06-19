@@ -1,14 +1,13 @@
 <?php
 
+namespace App\Traits;
+
 use GuzzleHttp\Client;
 
 trait ConsumeExternalServices
 {
     /**
      * Send a request to any service
-     * @param $service
-     * @param $method
-     * @param $parameters
      * @return string
      */
     public function performeRequest($method, $requestUrl, $formParams = [], $headers = [])
