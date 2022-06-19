@@ -17,6 +17,10 @@ trait ConsumeExternalServices
             'timeout'  => 2.0,
         ]);
 
+        if (isset($this->secret)) {
+            $headers['Authorization'] = $this->secret;
+        }
+
         $response = $client->request($method, $requestUrl, [
             'headers' => $headers,
             'form_params' => $formParams,
