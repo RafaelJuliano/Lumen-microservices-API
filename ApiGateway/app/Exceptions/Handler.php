@@ -2,13 +2,14 @@
 
 namespace App\Exceptions;
 
+use Throwable;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use GuzzleHttp\Exception\ClientException;
-use Throwable;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Response;
 
