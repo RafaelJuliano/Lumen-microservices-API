@@ -35,7 +35,7 @@ Name | Type | Description | Required
 -----|------|-------------|----------
 name | string | The name of the author | &#x2713;
 contry | string | The country of the author | &#x2713;
-gender | string | The gender of the author `male | female` | &#x2713;
+gender | string | The gender of the author `male or female` | &#x2713;
 
 ### Response
 
