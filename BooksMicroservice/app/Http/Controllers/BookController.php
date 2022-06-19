@@ -37,7 +37,10 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            // TODO
+            'title' => 'required|max:255',
+            'description' => 'required|max:255',
+            'price' => 'numeric|required|min:1',
+            'author_id' => 'numeric|required|min:1',
         ];
 
         $this->validate($request, $rules);
@@ -65,7 +68,10 @@ class BookController extends Controller
     public function update(Request $request, $book)
     {
         $rules = [
-            // TODO
+           'title' => 'max:255',
+            'description' => 'max:255',
+            'price' => 'numeric|min:1',
+            'author_id' => 'numeric|min:1',
         ];
 
         $this->validate($request, $rules);
