@@ -18,4 +18,50 @@ class AuthorService
     {
         $this->baseUri = config('services.authors.base_uri');
     }
+
+    /**
+     * Return the list of authors
+     * @return string
+     */
+    public function getAuthors()
+    {
+        return $this->performeRequest('GET', '/authors');
+    }
+
+
+    /**
+     * Create one new author
+     * @return string
+     */
+    public function createAuthor($data)
+    {
+        return $this->performeRequest('POST', '/authors', $data);
+    }
+
+    /**
+     * Obtain and show one author
+     * @return string
+     */
+    public function showAuthor($author)
+    {
+        return $this->performeRequest('GET', "/authors/{$author}");
+    }
+
+    /**
+     * Update a existing author
+     * @return string
+     */
+    public function updateAuthor($data, $author)
+    {
+        return $this->performeRequest('PUT', "/authors/{$author}", $data);
+    }
+
+    /**
+     * Delete a existing author
+     * @return string
+     */
+    public function deleteAuthor($author)
+    {
+        return $this->performeRequest('DELETE', "/authors/{$author}");
+    }
 }
