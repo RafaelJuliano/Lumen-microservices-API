@@ -11,14 +11,11 @@ trait ApiResponser
      * Build success response
      * @param $data string/array $data
      * @param $code int $code
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
     private function successResponse($data, $code = Response::HTTP_OK)
     {
-        return response()->json([
-            'data' => $data,
-            'code' => $code
-        ], $code);
+        return response($data, $code)->header('Content-Type', 'application/json');
     }
 
     /**
@@ -35,4 +32,13 @@ trait ApiResponser
         ], $code);
     }
 
+    /**
+     * Build error response
+     * @param $data string/array $data
+     * @param $code int $code
+     * @return \Illuminate\Http\Response
+     */
+    private function errorMessage($message, $code){
+        return response($message, $code)->header('Content-Type', 'application/json');
+    }
 }
