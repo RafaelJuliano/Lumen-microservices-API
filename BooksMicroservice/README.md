@@ -1,24 +1,205 @@
-# Lumen PHP Framework
+# Book API
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+A API with the basics CRUD operation for Books entities.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## API Paths
 
-## Official Documentation
+### List Books `GET /books`
+Return a array of Books.
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+#### Response 
 
-## Contributing
+**Success**
+```json
+{
+    "code": 200,
+    "data" : [
+        {
+            "id": 2,
+            "title": "Ut explicabo non.",
+            "description": "Tempore illo facere magni quis.",
+            "price": "124",
+            "author_id": "1",
+            "created_at": "2022-06-19T15:03:20.000000Z",
+            "updated_at": "2022-06-19T15:03:20.000000Z"
+        }
+    ],  
+}
+```
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Create Book `POST /books`
+Create a new Book.
 
-## Security Vulnerabilities
+### Request body
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Name | Type | Description | Required 
+-----|------|-------------|----------
+title | string | The title of the book | &#x2713;
+description | string | The descrption of the book | &#x2713;
+price | number | The price of the book. | &#x2713;
+author_id | number | The id of the author. | &#x2713;
 
-## License
+### Response
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Success**
+```json
+{
+    "code": 201,
+	"data": {
+        "id": 2,
+        "title": "Ut explicabo non.",
+        "description": "Tempore illo facere magni quis.",
+        "price": "124",
+        "author_id": "1",
+        "created_at": "2022-06-19T15:03:20.000000Z",
+        "updated_at": "2022-06-19T15:03:20.000000Z"
+	},
+}
+```
+
+**Invalid Request**
+```json
+{
+    "error": {
+        "title": [
+            "The title field is required."
+        ],
+        "description": [
+            "The description field is required."
+        ],
+        "price": [
+            "The price field is required.",
+            "The price id must be at least 1."
+        ],
+        "author_id": [
+            "The author field is required.",
+            "The author id must be at least 1."
+        ]
+    },
+    "code": 422
+}
+```
+
+### Show Book `GET /books/{id}`
+Return a Book with the given id.
+
+#### Request Params
+
+Name | Type | Description 
+-----|------|-------------
+id   | integer | The id of the Book.
+
+#### Response
+
+**Success**
+```json
+{
+    "code": 200,
+    "data" : {
+        "id": 5,
+        "title": "Occaecati blanditiis ipsa est ut.",
+        "description": "Voluptatem molestiae neque consequatur ratione ea possimus.",
+        "price": "53",
+        "author_id": "41",
+        "created_at": "2022-06-19T15:03:20.000000Z",
+        "updated_at": "2022-06-19T15:03:20.000000Z"
+    }  
+}
+```
+
+**Not Found**
+```json
+{
+    "code": 404,
+    "error": "No instance of book was found",
+}
+```
+
+### Update Book `PUT /books/{id}` `PATCH /books/{id}`
+
+Update a Book with the given id.
+
+#### Request Params
+
+Name | Type | Description 
+-----|------|-------------
+id   | integer | The id of the Book.
+
+### Request body
+
+Name | Type | Description | Required 
+-----|------|-------------|----------
+title | string | The title of the book | &#x2713;
+description | string | The descrption of the book | &#x2713;
+price | number | The price of the book. | &#x2713;
+author_id | number | The id of the author. | &#x2713;
+
+#### Response
+
+**Success**
+```json
+{
+    "code": 200,
+    "data" : {
+        "id": 5,
+        "title": "Occaecati blanditiis ipsa est ut.",
+        "description": "Voluptatem molestiae neque consequatur ratione ea possimus.",
+        "price": "53",
+        "author_id": "41",
+        "created_at": "2022-06-19T15:03:20.000000Z",
+        "updated_at": "2022-06-19T15:03:20.000000Z"
+    }  
+}
+```
+
+**Not Found**
+```json
+{
+    "code": 404,
+    "error": "No instance of book was found",
+}
+```
+
+**Nothing to change**
+```json
+{
+    "code": 422,
+    "error": "At least one value must be different from the current one",
+}
+```
+
+### Delete Book `DELETE /books/{id}`
+
+Delete a Book with the given id.
+
+#### Request Params
+
+Name | Type | Description 
+-----|------|-------------
+id   | integer | The id of the Book.
+
+#### Response
+
+**Success**
+```json
+{
+    "code": 200,
+    "data" : {
+       "id": 5,
+        "title": "Occaecati blanditiis ipsa est ut.",
+        "description": "Voluptatem molestiae neque consequatur ratione ea possimus.",
+        "price": "53",
+        "author_id": "41",
+        "created_at": "2022-06-19T15:03:20.000000Z",
+        "updated_at": "2022-06-19T15:03:20.000000Z"
+    }  
+}
+```
+
+**Not Found**
+```json
+{
+    "code": 404,
+    "error": "No instance of book was found",
+}
+```
