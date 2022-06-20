@@ -18,6 +18,20 @@ trait ApiResponser
         return response($data, $code)->header('Content-Type', 'application/json');
     }
 
+     /**
+     * Build valid response
+     * @param $data string/array $data
+     * @param $code int $code
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function validResponse($data, $code = Response::HTTP_OK)
+    {
+        return response()->json([
+            'data' => $data,
+            'code' => $code
+        ], $code);
+    }
+
     /**
      * Build error response
      * @param $data string/array $data
